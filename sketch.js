@@ -62,6 +62,11 @@ function setup() {
 
 function draw() {
   
+camera.x = trex.x
+
+
+gameOver.position.x = restart.position.x = camera.x
+
   background(56);
   text("Score: "+ score, 500,50);
   
@@ -112,7 +117,7 @@ function draw() {
 function spawnClouds() {
   
   if (frameCount % 60 === 0) {
-    var cloud = createSprite(600,120,40,10);
+    var cloud = createSprite(camera.x+width/2,120,40,10);
     cloud.y = Math.round(random(80,120));
     cloud.addImage(cloudImage);
     cloud.scale = 0.5;
@@ -127,7 +132,7 @@ function spawnClouds() {
 
 function spawnObstacles() {
   if(frameCount % 60 === 0) {
-    var obstacle = createSprite(600,165,10,40);
+    var obstacle = createSprite(camera.x+width/2,165,10,40);
     obstacle.velocityX = -(6 + 3*score/100);
     
     //generate random obstacles
@@ -161,6 +166,12 @@ function reset(){
   obstaclesGroup.destroyEach();
   cloudsGroup.destroyEach();
   trex.changeAnimation("running",trex_running);
+
+  if(localStorage["HighestScore"]<score){
+    localStorage["HighestScore"] - score
+  }
+  console.log(localStorage["HighestScore"]);
+
   score = 0;
  }
 
