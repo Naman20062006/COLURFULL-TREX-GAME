@@ -63,9 +63,9 @@ function setup() {
 function draw() {
   
 camera.x = trex.x
+camera.y = trex.y
 
 
-gameOver.position.x = restart.position.x = camera.x
 
   background(56);
   text("Score: "+ score, 500,50);
